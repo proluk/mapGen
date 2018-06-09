@@ -3,19 +3,12 @@
   "version": "1.0.0",
   "description": "front layer of project",
   "main": "index.js",
-  "scripts": {
-    "test": "test",
-    "webpack": "./node_modules/.bin/webpack",
-    "watchwebpack": "./node_modules/.bin/webpack --progress --colors --watch"
-  },
+  "scripts": {},
   "author": "lp",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^4.9.0",
-    "jasmine": "^2.8.0",
-    "jasmine-es6": "^0.4.3",
-    "pixi.js": "^4.6.0",
-    "socket.io-client": "^2.0.4",
-    "webpack": "^3.8.1"
+    "cors": "^2.8.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
   }
 }
