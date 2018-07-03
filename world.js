@@ -4,6 +4,8 @@ class World{
                 aliveNum,
                 deathNum,
                 treeChance,
+                treeAliveNum,
+                treeDeathNum,
                 stoneChance,
                 reconstructRange,
                 reconstructTreeRange,
@@ -20,6 +22,8 @@ class World{
         this.aliveNum = aliveNum
         this.deathNum = deathNum;
         this.treeChance = treeChance;
+        this.treeAliveNum = treeAliveNum;
+        this.treeDeathNum = treeDeathNum;
         this.stoneChance = stoneChance;
         this.reconstructRange = reconstructRange;
         this.reconstructTreeRange = reconstructTreeRange;
@@ -45,6 +49,7 @@ class World{
                 }
             }
         }
+        this.goldVeins = [];
     }
     random(){
         return Math.random();
@@ -58,7 +63,7 @@ class World{
             for ( let m = (y - this.reconstructRange) ; m < (y + this.reconstructRange) ; m++ ) {
                 let _x = 0;
                 let _y = 0;
-                if ( i === 0 && m === 0 ) {
+                if ( i === x && m === y ) {
                     //do nothing
                 } else {
                     _x = this.periodicFunction(this.size, i);
@@ -89,7 +94,7 @@ class World{
             for ( let m = (y - this.reconstructTreeRange) ; m < (y + this.reconstructTreeRange) ; m++ ) {
                 let _x = 0;
                 let _y = 0;
-                if ( i === 0 && m === 0 ) {
+                if ( i === x && m === y ) {
                     //do nothing
                 } else {
                     _x = this.periodicFunction(this.size, i);
@@ -106,13 +111,13 @@ class World{
             }
         }
         if ( map[x][y] === 1 ) {
-            if ( aliveNeighbours < this.deathNum ){
+            if ( aliveNeighbours < this.treeDeathNum ){
                 return 1;
             } else {
                 return 2;
             }
         } else if ( map[x][y] === 2 ) {
-            if ( aliveNeighbours > this.aliveNum ){
+            if ( aliveNeighbours > this.treeAliveNum ){
                 return 2;
             } else {
                 return 1;
@@ -181,14 +186,14 @@ class World{
             this.setMap(newMap);
         }
     }
-    periodicFunction(size, iterator){
+    periodicFunction(size, cords){
         let val = 0;
-        if ( iterator < 0 ) {
-            val = size + iterator;
-        } else if ( iterator >= size ) {
-            val = iterator - size;
+        if ( cords < 0 ) {
+            val = size + cords;
+        } else if ( cords >= size ) {
+            val = cords - size;
         } else {
-            val = iterator;
+            val = cords;
         }
         return val;
     }
@@ -199,7 +204,7 @@ class World{
             for ( let m = (y - this.mountainReconstructRange) ; m < (y + this.mountainReconstructRange) ; m++ ) {
                 let _x = 0;
                 let _y = 0;
-                if ( i === 0 && m === 0 ) {
+                if ( i === x && m === y ) {
                     //do nothing
                 } else {
                     _x = this.periodicFunction(this.size, i);
@@ -265,7 +270,7 @@ class World{
             for ( let m = (y - this.snowReconstructRange) ; m < (y + this.snowReconstructRange) ; m++ ) {
                 let _x = 0;
                 let _y = 0;
-                if ( i === 0 && m === 0 ) {
+                if ( i === x && m === y ) {
                     //do nothing
                 } else {
                     _x = this.periodicFunction(this.size, i);
@@ -300,7 +305,7 @@ class World{
             for ( let m = (y - this.beachRange) ; m < (y + this.beachRange) ; m++ ) {
                 let _x = 0;
                 let _y = 0;
-                if ( i === 0 && m === 0 ) {
+                if ( i === x && m === y ) {
                     //do nothing
                 } else {
                     _x = this.periodicFunction(this.size, i);
@@ -390,13 +395,15 @@ class World{
 
 module.exports = world = new World(
     200, //rozmiar mapy
-    0.5, //szansa na stworzenie żywej komórki 'trawy'
-    18, //ilość potrzebnych komórek żywych w sąsiedztwie do ożywienia martwej komórki
-    17, //ilość martwych komórek w sąsiedztwie potrzebnych do zabicia żywej komórki
+    0.53, //szansa na stworzenie żywej komórki 'trawy'
+    72, //ilość potrzebnych komórek żywych w sąsiedztwie do ożywienia martwej komórki
+    71, //ilość martwych komórek w sąsiedztwie potrzebnych do zabicia żywej komórki
     0.76, //szansa na stworzenie drzewa
-    0.29, //szansa na stworzenie kamienia
-    3, //promień komórek wchodzących w skład sąsiedztwa danej komórki
-    3,
+    32,
+    31,
+    0.31, //szansa na stworzenie kamienia
+    6, //promień komórek wchodzących w skład sąsiedztwa danej komórki
+    4, //tree range
     10, //ilosc komorek kamienia w sasiedztwie potrzebnych do stworzenia gor
     17, //ilosc komorek wody w poblizu potrzebnych do tworzenia gor przy wodzie
     3, //promien komorek sasiedztwa kamienia

@@ -19,6 +19,7 @@
         let placeBeachesBt = document.getElementById('placeBeachesFn');
         let generateGoldVeinsBeginingsBt = document.getElementById('generateGoldVeinsBeginingsFn');
         let growGoldVeinsBt = document.getElementById('growGoldVeinsFn');
+        let generateImagesBt = document.getElementById('generateImages');
 
         generateRandomBt.addEventListener('click', () => apiCall('generateRandom',canvas));
         reconstructMapBt.addEventListener('click', () => apiCall('reconstructMap',canvas));
@@ -30,6 +31,7 @@
         placeBeachesBt.addEventListener('click', () => apiCall('placeBeaches',canvas));
         generateGoldVeinsBeginingsBt.addEventListener('click', () => apiCall('generateGoldVeinsBeginings',canvas));
         growGoldVeinsBt.addEventListener('click', () => apiCall('growGoldVeins',canvas));
+        generateImagesBt.addEventListener('click', () => apiCallPost(canvas));
     });
 
 </script>
@@ -46,5 +48,7 @@
     <button id="placeBeachesFn">placeBeaches</button>
     <button id="generateGoldVeinsBeginingsFn">generateGoldVeinsBeginings</button>
     <button id="growGoldVeinsFn">growGoldVeins</button>
+    <hr>
+    <button id="generateImages">Make image from canvas</button>
 </body>
 </html>
